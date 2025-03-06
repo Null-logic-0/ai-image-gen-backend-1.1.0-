@@ -16,7 +16,8 @@ import { globalErrorHandler } from "./controllers/errorController.js";
 export const app = express();
 
 // app.enable("trust proxy");
-app.use("*", cors());
+app.use(cors());
+app.options("*", cors());
 app.use(helmet());
 
 // Global Middlewares
