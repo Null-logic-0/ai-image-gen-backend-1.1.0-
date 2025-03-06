@@ -2,6 +2,8 @@ import Replicate from "replicate";
 import { catchAsync } from "../utils/catchAsync.js";
 import { Image } from "../models/imageModel.js";
 import { User } from "../models/userModel.js";
+import s3 from "../utils/s3Config.js";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
 
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN,
@@ -39,9 +41,24 @@ export const generateImage = catchAsync(async (req, res) => {
 
   const { image, format } = await imagePrompt(prompt, options);
 
+  const fileExtension = format.split("/")[1] || "jpg";
+  const fileName = `user-images/${userId}/${Date.now()}.${fileExtension}`;
+
+  const s3Params = {
+    Bucket: process.env.AWS_BUCKET_NAME,
+    Key: fileName,
+    Body: image,
+    ContentType: format,
+  };
+
+  const command = new PutObjectCommand(s3Params);
+  await s3.send(command);
+
+  const imageUrl = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${fileName}`;
+
   const newImage = await Image.create({
     user: userId,
-    imageData: image,
+    imageData: imageUrl,
     format,
   });
 
@@ -49,28 +66,26 @@ export const generateImage = catchAsync(async (req, res) => {
     $push: { images: newImage._id },
   });
 
-  res.type(format);
-  res.status(201).send(image);
+  res.status(201).json({ success: true, imageUrl });
 });
 
 export const getUserImages = catchAsync(async (req, res) => {
   const userId = req.user.id;
 
-  const user = await User.findById(userId).populate("images");
+  const user = await User.findById(userId).populate("images", "imageData");
 
   if (!user) {
     return res.status(404).send({ error: "User not found" });
   }
 
-  const imagesWithBase64 = user.images.map((image) => {
-    const base64Image = image.imageData.toString("base64");
-    return {
-      ...image.toObject(),
-      imageData: `data:${image.format};base64,${base64Image}`,
-    };
-  });
+  const images = user.images.map((image) => ({
+    imageData: image.imageData,
+    format: image.format,
+    createdAt: image.createdAt,
+    _id: image._id,
+  }));
 
-  res.status(200).send(imagesWithBase64);
+  return res.status(200).json({ success: true, images });
 });
 
 export const deleteImage = catchAsync(async (req, res) => {
@@ -95,27 +110,3 @@ export const deleteImage = catchAsync(async (req, res) => {
 
   res.status(200).send({ message: "Image deleted successfully" });
 });
-
-// export const generateImage = catchAsync(async (req, res) => {
-//   const { prompt, options } = req.body;
-
-//   if (!prompt || prompt.trim().length === 0) {
-//     return res.status(400).send({ error: "Invalid prompt" });
-//   }
-
-//   const { image, format } = await imagePrompt(prompt, options);
-//   res.type(format);
-//   res.status(201).send(image);
-// });
-
-// export const getUserImages = catchAsync(async (req, res) => {
-//   const userId = req.user.id;
-
-//   const user = await User.findById(userId).populate("images");
-
-//   if (!user) {
-//     return res.status(404).send({ error: "User not found" });
-//   }
-
-//   res.status(200).send(user.images);
-// });
