@@ -16,7 +16,13 @@ import { globalErrorHandler } from "./controllers/errorController.js";
 export const app = express();
 
 // app.enable("trust proxy");
-app.use(cors());
+app.use(
+  "*",
+  cors({
+    origin: "https://ai-image-generator-version-1-1-0.vercel.app",
+    credentials: true,
+  })
+);
 app.options("*", cors());
 app.use(helmet());
 
