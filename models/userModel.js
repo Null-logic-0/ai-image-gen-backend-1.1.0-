@@ -51,6 +51,12 @@ const userSchema = mongoose.Schema({
       ref: "Image",
     },
   ],
+  videos: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Video",
+    },
+  ],
 });
 
 userSchema.pre("save", async function (next) {
@@ -94,7 +100,6 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
     return JWTTimestamp < changedTimestamp;
   }
 
-  // False means NOT changed
   return false;
 };
 

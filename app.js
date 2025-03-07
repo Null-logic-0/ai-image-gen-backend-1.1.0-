@@ -11,6 +11,7 @@ import compression from "compression";
 
 import { router as userRouter } from "./routes/userRoutes.js";
 import { router as imageGenRouter } from "./routes/imageGenRoute.js";
+import { router as videoGenRouter } from "./routes/videoGenRoute.js";
 import { globalErrorHandler } from "./controllers/errorController.js";
 
 export const app = express();
@@ -72,6 +73,7 @@ app.use((req, res, next) => {
 // Routes
 app.use("/api/v.1/users", userRouter);
 app.use("/api/v.1/flux-schnell", imageGenRouter);
+app.use("/api/v.1/wan-video", videoGenRouter);
 
 // global error
 app.use(globalErrorHandler);
