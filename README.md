@@ -76,6 +76,8 @@ Whatch video ----->
 
 https://www.youtube.com/watch?v=J5digNPWANw
 
+*
+
 Front-End -------->
 
 https://github.com/Null-logic-0/AI-image-generator-version-1.1.0-Front-end
