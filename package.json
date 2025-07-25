@@ -8,8 +8,8 @@
     "dev": "node --watch --env-file=.env server.js",
     "start": "node server.js"
   },
-  "author": "luka tchelidze",
-  "license": "ISC",
+  "author": "Luka Tchelidze",
+  "license": "Apache-2.0",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.758.0",
     "@aws-sdk/s3-request-presigner": "^3.758.0",
