@@ -16,7 +16,7 @@ A backend service that enables AI-powered image generation, user authentication,
     Storage: AWS storage
     AI API: Replicate API
 
-🚀 Installation & Setup
+🚀 Installation & Setup: Development
 
 1️⃣ Clone the Repository
 
@@ -26,7 +26,8 @@ A backend service that enables AI-powered image generation, user authentication,
 2️⃣ Install Dependencies
 
     npm install
-3️⃣ Setup Environment Variables
+3️⃣ Developent: Setup Environment Variables 
+This project uses environment variables to connect to services like MongoDB, AWS, and Replicate. These should be stored in a .env file for local development.
 Create a .env file in the root directory and add:
 
  
@@ -45,12 +46,30 @@ Create a .env file in the root directory and add:
     
     REPLICATE_API_TOKEN=your_replicate-ai-token
 
-
 4️⃣ Run the Server
 
+    npm run dev
+
+🔒 .env files should never be committed to Git. Make sure .gitignore includes .env
+
+🚀 Installation & Setup: Production
+
+In production, environment variables should be set using your hosting provider’s dashboard. You don’t need or use a .env file on the live server.
+Use the provider’s UI to add each key (e.g., AWS_BUCKET_NAME, DATABASE, etc.).
+These will be securely injected into the environment at runtime.
+
+1️⃣ Clone the Repository
+
+    git clone https://github.com/Null-logic-0/ai-image-gen-backend-1.1.0-.git
+    cd ai-image-gen-backend-1.1.0-
+
+2️⃣ Install Dependencies
+
+    npm install
+
+3️⃣ Run the Server
+
     npm start
-
-
 
 ![Screenshot 2025-03-07 at 14 48 06](https://github.com/user-attachments/assets/3c05668e-cfbf-415e-a5c9-6aff19e5e0ce)
 ![Screenshot 2025-03-07 at 14 48 57](https://github.com/user-attachments/assets/84b8f889-3b2a-4b49-bc19-fe57a07439f7)
