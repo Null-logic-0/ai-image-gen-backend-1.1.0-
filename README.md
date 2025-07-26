@@ -20,8 +20,8 @@ A backend service that enables AI-powered image generation, user authentication,
 
 1️⃣ Clone the Repository
 
-    git clone https://github.com/Null-logic-0/ai-image-gen-backend-1.1.0.git
-    cd ai-image-gen-backend-1.1.0
+    git clone https://github.com/Null-logic-0/ai-image-gen-backend-1.1.0-.git
+    cd ai-image-gen-backend-1.1.0-
 
 2️⃣ Install Dependencies
 
