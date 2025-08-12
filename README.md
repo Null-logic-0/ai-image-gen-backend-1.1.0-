@@ -1,5 +1,5 @@
 AI Image Generator - Backend
-A backend service that enables AI-powered image generation, user authentication, and image storage. Built using Node.js, Express.js, and Supabase.
+A backend service that enables AI-powered image generation, user authentication, and image storage. Built using Node.js, Express.js, and MongoDB.
 
 📌 Features
     
@@ -13,7 +13,7 @@ A backend service that enables AI-powered image generation, user authentication,
     Backend: Node.js, Express.js
     Database: Mongo.DB & Mongoose
     Authentication: JWT token stored in cookies
-    Storage: AWS storage
+    Storage: AWS storage S3
     AI API: Replicate API
 
 🚀 Installation & Setup: Development
