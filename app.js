@@ -22,7 +22,7 @@ app.options("*", cors());
 app.use(helmet());
 
 // Global Middlewares
-if ((process.env.NODE_ENV = "development")) {
+if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
   console.log(`App is on ${process.env.NODE_ENV} mode`);
 }
