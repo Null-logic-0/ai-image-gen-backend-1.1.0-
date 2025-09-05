@@ -2,7 +2,7 @@
   "name": "ai-image-generator-v-1.0.1",
   "version": "1.0.0",
   "description": "creating ai-image-generator",
-  "main": "app.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "dev": "node --watch --env-file=.env server.js",
