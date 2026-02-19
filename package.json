@@ -11,8 +11,8 @@
   "author": "Luka Tchelidze",
   "license": "Apache-2.0",
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.758.0",
-    "@aws-sdk/s3-request-presigner": "^3.758.0",
+    "@aws-sdk/client-s3": "^3.993.0",
+    "@aws-sdk/s3-request-presigner": "^3.993.0",
     "aws-sdk": "^2.1692.0",
     "bcryptjs": "^3.0.2",
     "compression": "^1.8.1",
